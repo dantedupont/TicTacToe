@@ -1,26 +1,77 @@
 export type Player = 'X' | 'O'
-export type GamEnd = 'X' | 'O' | 'tie'
 export type Cell = Player | null
 export type GameEnd = true | false
-export type Board = Cell[]
+export type Board = Cell[] 
 
 export type Game = {
     Board: Board,
     Player: Player,
-    GameEnd: GameEnd
+    GameEnd: GameEnd,
+    GameStatus: string,
 }
 
 export function initialGameState() : Game {
     const newGame: Game = {
         Board: Array(9).fill(null),
         Player: 'X',
-        GameEnd: false
+        GameEnd: false,
+        GameStatus: '',
     }
     return newGame
 }
   
-function move(Game: Game, Player: Player){
+export function move(game: Game, cellIndex: number): Game{
+    if(game.Board[cellIndex] || checkEnd(game.Board)){
+        return game
+    }
+    const newGame = structuredClone(game)
 
+    newGame.Board[cellIndex] = newGame.Player
+    
+    if(checkEnd(newGame.Board)){
+        newGame.GameStatus = `${newGame.Player} wins!`
+        newGame.GameEnd = true
+        return newGame;
+    }
+
+    if (newGame.Board.every((square) => square !== null)) {
+        newGame.GameStatus = 'Tie!'
+        newGame.GameEnd = true
+        return newGame
+    }
+
+    if(game.Player === 'X'){
+        newGame.Player = 'O'
+    } else {
+        newGame.Player = 'X'
+    }
+
+    return newGame
+}
+
+const winLines: number[][] = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ]
+
+
+function checkEnd(board: Board): boolean {
+    for(const line of winLines){
+      let a = line[0]
+      let b = line[1]
+      let c = line[2]
+  
+      if(board[a] === board[b] && board[b] === board[c] && board[a] !== null){
+        return true;
+      }
+    }
+    return false;
 }
   
   /*
