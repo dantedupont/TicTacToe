@@ -1,16 +1,36 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Board from './components/Board'
-import Results from './components/Results'
-import MenuScreen from './components/MenuScreen'
+export type Player = 'X' | 'O'
+export type GamEnd = 'X' | 'O' | 'tie'
+export type Cell = Player | null
+export type GameEnd = true | false
+export type Board = Cell[]
 
-const App = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+export type Game = {
+    Board: Board,
+    Player: Player,
+    GameEnd: GameEnd
+}
+
+export function initialGameState() : Game {
+    const newGame: Game = {
+        Board: Array(9).fill(null),
+        Player: 'X',
+        GameEnd: false
+    }
+    return newGame
+}
+  
+function move(Game: Game, Player: Player){
+
+}
+  
+  /*
   const [playerOneTurn, setPlayerOneTurn] = useState(true);
   const [gameEnd, setGameEnd] = useState(false);
   const [gameStatus, setGameStatus] = useState(null);
   const [isWaitingForComputer, setIsWaitingForComputer] = useState(false); //prevent clicks while it's the computer's turn
   const [gameMode, setGameMode] = useState('menu');
+
+  const squares: number[] = Array(9).fill(null)
 
   const lines = [
     [0,1,2],
@@ -23,7 +43,7 @@ const App = () => {
     [2,4,6]
   ]
 
-  function checkForWin(squares, playerMark){
+  function checkForWin(squares: number[], playerMark: string){
     for(const line of lines){
       let playerCount = 0
       let emptySpot = null
@@ -156,30 +176,4 @@ const App = () => {
     setIsWaitingForComputer(false);
     setGameMode(`${mode}`)
   }
-
-  return (
-    <div className={gameEnd ? "game-end" : "game"}>
-      {gameMode === 'menu' 
-        ? <MenuScreen rematch={rematch} />
-        : 
-          <>
-            {gameEnd 
-              ? <Results 
-                  gameStatus={gameStatus} 
-                  rematch={rematch} 
-                  gameMode={gameMode}
-                  setGameMode={setGameMode}
-                /> 
-              : null
-            }
-            <Board 
-              squares={squares} 
-              squareClick={squareClick}
-            />
-          </>
-      }
-    </div>
-  )
-}
-
-export default App
+    */
