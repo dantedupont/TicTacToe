@@ -1,11 +1,16 @@
 import React from 'react';
+import { GameMode } from '../game/game'
 
-const MenuScreen = ({ rematch }) => {
+type MenuProps = {
+    rematch: (gameMode: GameMode) => void,
+}
+
+const MenuScreen = ({ rematch } : MenuProps) => {
     function handlePvP(){
-        rematch('vsPlayer')
+        rematch('PvP')
     }
     function handlePvC(){
-        rematch('vsComputer')
+        rematch('PvC')
     }
 
     return(

@@ -102,17 +102,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .game-results h1 {
     font-size: 300%;
     font-weight: bolder;
     font-family: sans-serif;
+    text-align: center;
     background-color: white;
     padding: 25px;
     border: double black 10px;
     border-radius: 5px;
+    width: 100%;
 }
 
 .game-results button {
@@ -126,6 +127,7 @@
     padding: 2% 2%;
     border-radius: 16px;
     margin-bottom: 5%;
+    width: 100%;
 }
 
 .game-results button:hover {
