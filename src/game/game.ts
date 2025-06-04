@@ -5,6 +5,7 @@ export type Board = Cell[]
 export type GameMode = 'menu' | 'PvP' | 'PvC'
 
 export type Game = {
+    id: string,
     GameMode: GameMode,
     Board: Board,
     Player: Player,
@@ -14,6 +15,7 @@ export type Game = {
 
 export function initialGameState(mode: GameMode) : Game {
     const newGame: Game = {
+        id: crypto.randomUUID(),
         GameMode: mode,
         Board: Array(9).fill(null),
         Player: 'X',

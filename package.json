@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://dantedupont.github.io/TicTacToe",
   "scripts": {
-    "dev": "bunx --bun vite",
+    "dev": "bun run --watch server.ts",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -13,8 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "uuid": "^11.1.0",
+    "vite-express": "^0.21.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
