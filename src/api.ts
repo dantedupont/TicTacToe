@@ -2,8 +2,8 @@ import { type Game, initialGameState as createGame, move as makeGameMove } from 
 
 export interface TicTacToeApi {
     createGame(): Promise<Game>,
-    makeGameMove(gameId: string, cellIndex: number): Promise<Game>,
-    getGame(gameId: string): Promise<Game>
+    getGame(gameId: string): Promise<Game | undefined>,
+    makeGameMove(gameId: string, cellIndex: number): Promise<Game>
 }
 
 export class TicTacToeApiClient implements TicTacToeApi {

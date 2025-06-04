@@ -1,6 +1,6 @@
 export type Player = 'X' | 'O'
 export type Cell = Player | null
-export type GameEnd = true | false
+export type GameEnd = 'true' | 'false'
 export type Board = Cell[] 
 export type GameMode = 'menu' | 'PvP' | 'PvC'
 
@@ -19,7 +19,7 @@ export function initialGameState(mode: GameMode) : Game {
         GameMode: mode,
         Board: Array(9).fill(null),
         Player: 'X',
-        GameEnd: false,
+        GameEnd: 'false',
         GameStatus: '',
     }
     return newGame
@@ -35,13 +35,13 @@ export function move(game: Game, cellIndex: number): Game {
     
     if(checkEnd(newGame.Board)){
         newGame.GameStatus = `${newGame.Player} wins!`
-        newGame.GameEnd = true
+        newGame.GameEnd = 'true'
         return newGame;
     }
 
     if (newGame.Board.every((square) => square !== null)) {
         newGame.GameStatus = 'Tie!'
-        newGame.GameEnd = true
+        newGame.GameEnd = 'true'
         return newGame
     }
 

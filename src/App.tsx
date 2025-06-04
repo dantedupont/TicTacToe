@@ -65,9 +65,9 @@ const App = () => {
   }
 
   return (
-    <div className={game.GameEnd ? "game-end" : "game"}>
+    <div className={game.GameEnd === 'true' ? "game-end" : "game"}>
       <>
-        {game.GameEnd 
+        {game.GameEnd === 'true'
               ? <Results 
                   gameStatus={game.GameStatus} 
                   rematch={rematch} 
