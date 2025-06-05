@@ -47,4 +47,17 @@ export class DbTicTacToeApi implements TicTacToeApi {
             .where(eq(gameTable.id, gameId))
         return updatedGame
     }
+
+    async getGames(): Promise<Game[]> {
+        const results = await this.db.select().from(gameTable).where(eq(gameTable.End, 'false'))
+        return results.map(game => ({
+            id: game.id,
+            GameMode: game.Mode as GameMode,
+            Board: game.Board as Board,
+            Player: game.Player as Player,
+            GameEnd: game.End as GameEnd,
+            GameStatus: game.Status as Game['GameStatus']
+        }))
+    }
 }
+
