@@ -28,8 +28,9 @@ const GameView = () => {
       }
     }
   
-    function rematch(mode: GameMode){
-      setGame(initialGameState(mode))
+    async function rematch(mode: GameMode){
+      const newGame = await api.createGame()
+      setGame(newGame)
     }
   
     if (!game) {
