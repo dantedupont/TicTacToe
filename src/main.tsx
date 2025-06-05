@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router'
-import GameLobby from './GameLobby'
-import GameView from './GameView'
+import GameLobby from './components/GameLobby'
+import GameView from './components/GameView'
 import { TicTacToeApiClient } from './api'
 
 const api = new TicTacToeApiClient();

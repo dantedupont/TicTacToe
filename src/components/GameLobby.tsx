@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router"
-import type { Game } from "./game/game"
+import type { Game } from "../game/game"
 import { useState } from "react"
 
 const GameLobby = () => {
@@ -9,7 +9,8 @@ const GameLobby = () => {
 
     return(
         <div>
-            <h2>GameLobby</h2>
+            <h2 className="text-xl">GameLobby</h2>
+            <button>Start New Game</button>
             Super Cool List of Games
             {games.map(game => (
                 <div key={game.id}>
