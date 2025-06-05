@@ -1,9 +1,9 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { TicTacToeApi } from '../api';
 import { type Game, initialGameState as createGame, move as makeGameMove } from "../game/game"
-import { GameMode, Board, Player, GameEnd } from "../game/game"
+import { GameMode, Board, Player } from "../game/game"
 import { gameTable } from './schema';
-import { eq } from 'drizzle-orm';
+import { eq, isNull } from 'drizzle-orm';
 
 
 export class DbTicTacToeApi implements TicTacToeApi {
@@ -17,7 +17,6 @@ export class DbTicTacToeApi implements TicTacToeApi {
             Board: game.Board,
             Player: game.Player,
             End: game.GameEnd,
-            Status: game.GameStatus
         })
         return game
     }
@@ -32,8 +31,7 @@ export class DbTicTacToeApi implements TicTacToeApi {
             GameMode: row.Mode as GameMode,
             Board: row.Board as Board,
             Player: row.Player as Player,
-            GameEnd: row.End as GameEnd,
-            GameStatus: row.Status as Game['GameStatus']
+            GameEnd: row.End as Game['GameEnd'],
         }
     }
     async makeGameMove(gameId: string, cellIndex: number): Promise<Game> {
@@ -49,14 +47,13 @@ export class DbTicTacToeApi implements TicTacToeApi {
     }
 
     async getGames(): Promise<Game[]> {
-        const results = await this.db.select().from(gameTable).where(eq(gameTable.End, 'false'))
+        const results = await this.db.select().from(gameTable).where(isNull(gameTable.End))
         return results.map(game => ({
             id: game.id,
             GameMode: game.Mode as GameMode,
             Board: game.Board as Board,
             Player: game.Player as Player,
-            GameEnd: game.End as GameEnd,
-            GameStatus: game.Status as Game['GameStatus']
+            GameEnd: game.End as Game['GameEnd'],
         }))
     }
 }

@@ -7,5 +7,4 @@ export const gameTable = pgTable('TicTacToe', {
     Board: jsonb().$type<Board>(),
     Player: varchar({ length: 255 }).notNull(),
     End: varchar({ length: 255 }),
-    Status: varchar({ length: 255 })
 })

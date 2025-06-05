@@ -41,11 +41,11 @@ const GameView = () => {
 
 
     return (
-        <div className={game.GameEnd === 'true' ? "game-end" : "game"}>
+        <div className={game.GameEnd ? "game-end" : "game"}>
             <>
-                {game.GameEnd === 'true'
+                {game.GameEnd 
                     ? <Results 
-                        gameStatus={game.GameStatus} 
+                        gameEnd={game.GameEnd} 
                         rematch={rematch} 
                         gameMode={game.GameMode}
                         /> 

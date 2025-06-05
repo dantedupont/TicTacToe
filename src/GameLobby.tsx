@@ -13,7 +13,7 @@ const GameLobby = () => {
             Super Cool List of Games
             {games.map(game => (
                 <div key={game.id}>
-                        <Link to={`/game/${game.id}`}>{game.id}</Link>
+                        <Link to={`/game/${game.id}`}>Game: {game.id.slice(-2)}</Link>
                 </div>
             ))}
         </div>
