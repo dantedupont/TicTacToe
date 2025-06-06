@@ -1,7 +1,14 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { TicTacToeApi } from '../api';
-import { type Game, initialGameState as createGame, move as makeGameMove } from "../game/game"
-import { GameMode, Board, Player } from "../game/game"
+import { 
+    type Game,
+    initialGameState as createGame,
+    move as makeGameMove,
+    GameMode,
+    Board,
+    Player,
+    GameEnd
+ } from "../game/game"
 import { gameTable } from './schema';
 import { eq, isNull } from 'drizzle-orm';
 
@@ -13,7 +20,7 @@ if(!DB_URL) throw Error("No Database URL")
 export class DbTicTacToeApi implements TicTacToeApi {
     private db = drizzle(DB_URL);
 
-    async createGame(mode: Game['GameMode']): Promise<Game> {
+    async createGame(mode: GameMode): Promise<Game> {
         const game = createGame(mode)
         await this.db.insert(gameTable).values({
             id: game.id,
@@ -35,7 +42,7 @@ export class DbTicTacToeApi implements TicTacToeApi {
             GameMode: row.Mode as GameMode,
             Board: row.Board as Board,
             Player: row.Player as Player,
-            GameEnd: row.End as Game['GameEnd'],
+            GameEnd: row.End as GameEnd,
         }
     }
     async makeGameMove(gameId: string, cellIndex: number): Promise<Game> {
@@ -45,19 +52,25 @@ export class DbTicTacToeApi implements TicTacToeApi {
         }
         const updatedGame = makeGameMove(game, cellIndex)
         await this.db.update(gameTable)
-            .set(updatedGame)
+            .set({
+                id: updatedGame.id,
+                Mode: updatedGame.GameMode,
+                Board: updatedGame.Board,
+                Player: updatedGame.Player,
+                End: updatedGame.GameEnd
+            })
             .where(eq(gameTable.id, gameId))
         return updatedGame
     }
 
     async getGames(): Promise<Game[]> {
-        const results = await this.db.select().from(gameTable).where(isNull(gameTable.End))
+        const results = await this.db.select().from(gameTable).where(isNull(gameTable.End)).limit(10)
         return results.map(game => ({
             id: game.id,
             GameMode: game.Mode as GameMode,
             Board: game.Board as Board,
             Player: game.Player as Player,
-            GameEnd: game.End as Game['GameEnd'],
+            GameEnd: game.End as GameEnd,
         }))
     }
 }

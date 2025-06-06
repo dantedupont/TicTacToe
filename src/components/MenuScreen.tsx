@@ -1,4 +1,3 @@
-import React from 'react';
 import { TicTacToeApiClient } from '../api'
 import { useNavigate } from "react-router"
 
