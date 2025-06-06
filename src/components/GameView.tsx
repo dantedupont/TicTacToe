@@ -4,7 +4,7 @@ import Board from './Board'
 import Results from './Results'
 import '../GameView.css'
 import MenuScreen from './MenuScreen'
-import { initialGameState, move, GameMode, computerChoice, type Game } from '../game/game'
+import { GameMode, computerChoice, type Game } from '../game/game'
 import { TicTacToeApiClient } from '../api'
 import { GAME_UPDATED, USER_JOINED } from "../../constants"
 import { io } from "socket.io-client"
@@ -32,7 +32,11 @@ const GameView = () => {
   }
 
   useEffect(() => {
-    const socket = io('http://localhost:3000');
+    const socket = io('http://localhost:3000', {
+      transports: ['websocket'],
+      autoConnect: true
+    });
+    
     socket.on("connect", () => {
       console.log("connected to socket");
       socket.emit("join-game", game.id);
@@ -74,9 +78,6 @@ const GameView = () => {
 
   return (
       <div className={game.GameEnd ? "game-end" : "game"}>
-        {game.GameMode === 'menu'
-          ? <MenuScreen rematch={rematch} />
-          :
           <>
               {game.GameEnd 
                   ? <Results 
@@ -91,7 +92,6 @@ const GameView = () => {
               cellClick={cellClick}
               />
           </>
-        }
       </div>
   )
 }

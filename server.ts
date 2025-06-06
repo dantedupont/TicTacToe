@@ -41,7 +41,8 @@ const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
         methods: ["GET", "POST"]
-    }
+    },
+    transports: ['websocket']
 })
 
 app.post("/game/:gameId/move", async (req, res) => {

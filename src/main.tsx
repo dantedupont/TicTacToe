@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import GameLobby from './components/GameLobby'
 import GameView from './components/GameView'
 import { TicTacToeApiClient } from './api'
+import MenuScreen from './components/MenuScreen'
 
 const api = new TicTacToeApiClient();
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
           const games = await api.getGames()
           return { games }
         },
+      },
+      {
+        path: "/game/menu",
+        Component: MenuScreen
       },
       {
         path: "/game/:gameId",

@@ -1,4 +1,5 @@
 import { GameMode } from '../game/game'
+import { Link } from "react-router"
 
 type ResultsProps = {
     gameEnd: String,
@@ -11,7 +12,7 @@ const Results = ({ gameEnd, rematch, gameMode } : ResultsProps) => {
     return(
         <div className="game-results">
             <h1>{gameEnd}</h1>
-            <button onClick={() => rematch('menu')}>Menu</button>
+            <Link to={'/game/menu'}>Menu</Link>
             <button onClick={() => rematch(gameMode)}>Rematch</button>
         </div>
     )

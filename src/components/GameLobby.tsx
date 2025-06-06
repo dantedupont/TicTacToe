@@ -1,6 +1,6 @@
-import { Link, useLoaderData, useNavigate } from "react-router"
+import { Link, useLoaderData } from "react-router"
 import type { Game } from "../game/game"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { TicTacToeApiClient } from '../api'
 
 const api = new TicTacToeApiClient
@@ -8,18 +8,15 @@ const api = new TicTacToeApiClient
 const GameLobby = () => {
     const { games: initialGames } = useLoaderData<{ games: Game[]}>()
     const [games, setGames] = useState<Game[]>(initialGames)
-    const navigate = useNavigate()
 
-    async function handleNewGame() {
-        const newGame = await api.createGame('menu')
-        setGames([...games, newGame])
-        navigate(`/game/${newGame.id}`)
-    }
+    useEffect(() => {
+        setGames(initialGames)
+    }, [initialGames])
 
     return(
         <div>
             <h2 className="text-xl">GameLobby</h2>
-            <button onClick={handleNewGame}>Start New Game</button>
+            <Link to={'/game/menu'}>Start New Game</Link>
             {games.map(game => (
                 <div key={game.id}>
                         <Link to={`/game/${game.id}`}>Game: {game.id.slice(-2)}</Link>

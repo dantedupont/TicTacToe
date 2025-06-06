@@ -1,7 +1,7 @@
 export type Player = 'X' | 'O'
 export type Cell = Player | null
 export type Board = Cell[] 
-export type GameMode = 'menu' | 'PvP' | 'PvC'
+export type GameMode = 'PvP' | 'PvC'
 
 export type Game = {
     id: string,
