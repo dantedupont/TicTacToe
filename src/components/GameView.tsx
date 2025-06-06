@@ -26,6 +26,8 @@ const GameView = () => {
   const [message, setMessage] = useState<string | null>(null)
   
   async function cellClick(cellIndex: number){
+    console.log(game);
+    
     if(computerThinking){
       return
     }
@@ -33,9 +35,9 @@ const GameView = () => {
     setGame(newGame)
   }
 
-  async function rematch(mode: GameMode){
+  async function rematch(mode: GameMode, gameId: string){
     const newGame = await api.createGame(mode)
-    
+    newGame.id = gameId
     setGame(newGame)
   }
 
@@ -102,6 +104,7 @@ const GameView = () => {
                       gameEnd={game.GameEnd} 
                       rematch={rematch} 
                       gameMode={game.GameMode}
+                      gameId={game.id}
                       /> 
                   : null
               }
