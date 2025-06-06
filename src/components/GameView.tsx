@@ -19,10 +19,11 @@ const GameView = () => {
   const [computerThinking, setComputerThinking] = useState(false)
   
   async function cellClick(cellIndex: number){
-    if(computerThinking === false){
-      const newGame = await api.makeGameMove(game!.id, cellIndex)
-      setGame(newGame)
+    if(computerThinking){
+      return
     }
+    const newGame = await api.makeGameMove(game!.id, cellIndex)
+    setGame(newGame)
   }
 
   async function rematch(mode: GameMode){
@@ -50,6 +51,20 @@ const GameView = () => {
       socket.disconnect()
     }
   }, [game.id])
+
+  useEffect(() => {
+    if(game.GameMode === 'PvC' && !game.GameEnd){
+      if(game.Player === 'O'){
+        setComputerThinking(true)
+        const timer = setTimeout(async () => {
+          const newGame = await api.makeGameMove(game!.id, computerChoice(game))
+          setGame(newGame);
+          setComputerThinking(false)
+          }, 800)
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [game])
 
   if (!game) {
     return (

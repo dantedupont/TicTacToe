@@ -31,7 +31,7 @@ export function move(game: Game, cellIndex: number): Game {
     newGame.Board[cellIndex] = newGame.Player
     
     if(checkEnd(newGame.Board)){
-        newGame.GameEnd = `${newGame.Player} wins!`
+        newGame.GameEnd = `${newGame.Player} wins!`        
         return newGame;
     }
 
