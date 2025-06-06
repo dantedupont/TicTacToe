@@ -9,8 +9,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "bun run build",
-    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.44.1",
