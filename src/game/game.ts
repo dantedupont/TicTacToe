@@ -1,24 +1,23 @@
 export type Player = 'X' | 'O'
 export type Cell = Player | null
-export type GameEnd = true | false
 export type Board = Cell[] 
-export type GameMode = 'menu' | 'PvP' | 'PvC'
+export type GameMode = 'PvP' | 'PvC'
 
 export type Game = {
+    id: string,
     GameMode: GameMode,
     Board: Board,
     Player: Player,
-    GameEnd: GameEnd,
-    GameStatus: string,
+    GameEnd: string | null,
 }
 
 export function initialGameState(mode: GameMode) : Game {
     const newGame: Game = {
+        id: crypto.randomUUID(),
         GameMode: mode,
         Board: Array(9).fill(null),
         Player: 'X',
-        GameEnd: false,
-        GameStatus: '',
+        GameEnd: null,
     }
     return newGame
 }
@@ -32,14 +31,12 @@ export function move(game: Game, cellIndex: number): Game {
     newGame.Board[cellIndex] = newGame.Player
     
     if(checkEnd(newGame.Board)){
-        newGame.GameStatus = `${newGame.Player} wins!`
-        newGame.GameEnd = true
+        newGame.GameEnd = `${newGame.Player} wins!`        
         return newGame;
     }
 
     if (newGame.Board.every((square) => square !== null)) {
-        newGame.GameStatus = 'Tie!'
-        newGame.GameEnd = true
+        newGame.GameEnd = 'Tie!'
         return newGame
     }
 
