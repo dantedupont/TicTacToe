@@ -47,15 +47,22 @@ const GameView = () => {
         setMessage(`user ${userId} joined`)
         setTimeout(() => {
           setMessage(null)
-        }, 5000)
+        }, 3000)
       })
       socket.on(GAME_UPDATED, (game: Game) => {
         console.log("game updated", game);
         setGame(game)
       })
+      socket.on("user-left", (userId: string) => {
+        setMessage(`${userId} has left the room`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000)
+      })
     })
 
     return () => {
+      socket.emit("leaving-game", { gameId: game.id, userId: socket.id })
       socket.disconnect()
     }
   }, [game.id])

@@ -64,6 +64,11 @@ io.on("connection", (socket) => {
         console.log(`Socket ${socket.id} joined room ${roomId}`);
         io.to(roomId).emit(USER_JOINED, socket.id)
     })
+    socket.on("leaving-game", ({ gameId, userId }) => {
+        const roomId = makeRoomId({ id: gameId } as Game)
+        socket.to(roomId).emit("user-left", userId)
+        socket.leave(roomId)
+    })
 })
 
 
