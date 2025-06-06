@@ -11,7 +11,7 @@ const GameLobby = () => {
     const navigate = useNavigate()
 
     async function handleNewGame() {
-        const newGame = await api.createGame()
+        const newGame = await api.createGame('menu')
         setGames([...games, newGame])
         navigate(`/game/${newGame.id}`)
     }

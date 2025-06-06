@@ -22,7 +22,7 @@ app.get("/game/:gameId", async (req, res) => {
     res.json(game)
 })
 app.post("/game", async (req, res) => {
-    const game = await api.createGame()
+    const game = await api.createGame(req.body.mode)
     res.json(game)
 })
 app.get("/games", async (req, res) => {

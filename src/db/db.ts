@@ -13,11 +13,11 @@ if(!DB_URL) throw Error("No Database URL")
 export class DbTicTacToeApi implements TicTacToeApi {
     private db = drizzle(DB_URL);
 
-    async createGame(): Promise<Game> {
-        const game = createGame('PvP')
+    async createGame(mode: Game['GameMode']): Promise<Game> {
+        const game = createGame(mode)
         await this.db.insert(gameTable).values({
             id: game.id,
-            Mode: 'PvP',
+            Mode: game.GameMode,
             Board: game.Board,
             Player: game.Player,
             End: game.GameEnd,

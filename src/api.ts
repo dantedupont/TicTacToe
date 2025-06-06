@@ -1,7 +1,7 @@
 import { type Game, initialGameState as createGame, move as makeGameMove } from "./game/game"
 
 export interface TicTacToeApi {
-    createGame(): Promise<Game>,
+    createGame(mode: Game['GameMode']): Promise<Game>,
     getGame(gameId: string): Promise<Game | undefined>,
     makeGameMove(gameId: string, cellIndex: number): Promise<Game>,
     getGames(): Promise<Game[]>
@@ -10,12 +10,13 @@ export interface TicTacToeApi {
 const baseUrl = "http://localhost:3000"
 
 export class TicTacToeApiClient implements TicTacToeApi {
-    async createGame(): Promise<Game> {
+    async createGame(mode: Game['GameMode']): Promise<Game> {
         const response = await fetch(`${baseUrl}/game`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({mode})
         })
         const game = await response.json()
         return game

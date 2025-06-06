@@ -26,7 +26,7 @@ const GameView = () => {
   }
 
   async function rematch(mode: GameMode){
-    const newGame = await api.createGame()
+    const newGame = await api.createGame(mode)
     setGame(newGame)
   }
 
@@ -59,6 +59,9 @@ const GameView = () => {
 
   return (
       <div className={game.GameEnd ? "game-end" : "game"}>
+        {game.GameMode === 'menu'
+          ? <MenuScreen rematch={rematch} />
+          :
           <>
               {game.GameEnd 
                   ? <Results 
@@ -73,6 +76,7 @@ const GameView = () => {
               cellClick={cellClick}
               />
           </>
+        }
       </div>
   )
 }
