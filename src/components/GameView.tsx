@@ -3,11 +3,11 @@ import { useLoaderData } from "react-router"
 import Board from './Board'
 import Results from './Results'
 import '../GameView.css'
-import MenuScreen from './MenuScreen'
 import { GameMode, computerChoice, type Game } from '../game/game'
 import { TicTacToeApiClient } from '../api'
 import { GAME_UPDATED, USER_JOINED } from "../../constants"
 import { io } from "socket.io-client"
+import Notification from "./Notification"
 
 const api = new TicTacToeApiClient
 
@@ -17,6 +17,7 @@ const GameView = () => {
 
   const [game, setGame] = useState<Game>(initialGame)
   const [computerThinking, setComputerThinking] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
   
   async function cellClick(cellIndex: number){
     if(computerThinking){
@@ -43,7 +44,10 @@ const GameView = () => {
       
       socket.on(USER_JOINED, (userId: string) => {
         console.log(`user ${userId} joined`);
-        
+        setMessage(`user ${userId} joined`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
       socket.on(GAME_UPDATED, (game: Game) => {
         console.log("game updated", game);
@@ -87,6 +91,7 @@ const GameView = () => {
                       /> 
                   : null
               }
+              <Notification message={message}/>
               <Board 
               board={game.Board} 
               cellClick={cellClick}
