@@ -2,13 +2,14 @@ export type Player = 'X' | 'O'
 export type Cell = Player | null
 export type Board = Cell[] 
 export type GameMode = 'PvP' | 'PvC'
+export type GameEnd = 'X wins!' | 'O wins!' | 'Tie!' | null
 
 export type Game = {
     id: string,
     GameMode: GameMode,
     Board: Board,
     Player: Player,
-    GameEnd: string | null,
+    GameEnd: GameEnd,
 }
 
 export function initialGameState(mode: GameMode) : Game {

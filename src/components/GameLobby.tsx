@@ -31,7 +31,7 @@ const GameLobby = () => {
                             >
                                 <div className="flex justify-center items-center">
                                     <span className="text-lg font-medium text-gray-700">
-                                        Unfinished Game: {game.id.slice(-2)}
+                                        Unfinished Game ID: {game.id.slice(-2)}
                                     </span>
                                 </div>
                             </Link>
