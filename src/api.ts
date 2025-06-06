@@ -1,4 +1,4 @@
-import { type Game, initialGameState as createGame, move as makeGameMove } from "./game/game"
+import { type Game } from "./game/game"
 
 export interface TicTacToeApi {
     createGame(mode: Game['GameMode']): Promise<Game>,
@@ -45,5 +45,6 @@ export class TicTacToeApiClient implements TicTacToeApi {
         const games = await response.json()
         return games
     }
+
 }
 
