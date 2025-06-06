@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react"
 import { useLoaderData } from "react-router"
+import { io } from "socket.io-client"
+
 import Board from './Board'
 import Results from './Results'
-import '../GameView.css'
+import Notification from "./Notification"
+
+
 import { GameMode, computerChoice, type Game } from '../game/game'
 import { TicTacToeApiClient } from '../api'
 import { GAME_UPDATED, USER_JOINED } from "../../constants"
-import { io } from "socket.io-client"
-import Notification from "./Notification"
+
+import '../GameView.css'
+
+
 
 const api = new TicTacToeApiClient
 
@@ -29,6 +35,7 @@ const GameView = () => {
 
   async function rematch(mode: GameMode){
     const newGame = await api.createGame(mode)
+    
     setGame(newGame)
   }
 
@@ -103,6 +110,13 @@ const GameView = () => {
               board={game.Board} 
               cellClick={cellClick}
               />
+              {game.GameMode === 'PvP' ? 
+                <h2 className="text-2xl font-semibold text-gray-800 mt-6 text-center">
+                Play locally or share link to play online
+              </h2>
+              :
+              null  
+              }
           </>
       </div>
   )

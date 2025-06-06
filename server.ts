@@ -66,8 +66,7 @@ io.on("connection", (socket) => {
     })
     socket.on("leaving-game", ({ gameId, userId }) => {
         const roomId = makeRoomId({ id: gameId } as Game)
-        socket.to(roomId).emit("user-left", userId)
-        socket.leave(roomId)
+        io.to(roomId).emit("user-left", socket.id)
     })
 })
 
