@@ -6,8 +6,12 @@ import { gameTable } from './schema';
 import { eq, isNull } from 'drizzle-orm';
 
 
+const DB_URL = process.env.DATABASE_URL as string
+if(!DB_URL) throw Error("No Database URL")
+
+
 export class DbTicTacToeApi implements TicTacToeApi {
-    private db = drizzle(process.env.DATABASE_URL!);
+    private db = drizzle(DB_URL);
 
     async createGame(): Promise<Game> {
         const game = createGame('PvP')

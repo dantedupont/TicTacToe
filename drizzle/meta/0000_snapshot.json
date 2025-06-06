@@ -1,0 +1,62 @@
+{
+  "id": "e2e8c268-0850-40e2-bcd2-3a99f58b4629",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.TicTacToe": {
+      "name": "TicTacToe",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "Mode": {
+          "name": "Mode",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Board": {
+          "name": "Board",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Player": {
+          "name": "Player",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "End": {
+          "name": "End",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
