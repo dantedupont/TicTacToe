@@ -13,7 +13,6 @@ Simple, local only, React version on: https://dantedupont.github.io/TicTacToe/
 * Game lobby system
 * Live game state updates
 * Player notifications
-* Game history tracking
   
 ### Tech Stack
 * Frontend: React, TypeScript, Tailwind CSS
