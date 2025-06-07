@@ -8,7 +8,7 @@
     "dev": "bun run --watch server.ts",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.44.1",
