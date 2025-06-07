@@ -66,6 +66,7 @@ export class DbTicTacToeApi implements TicTacToeApi {
     }
 
     async getGames(): Promise<Game[]> {
+        try {
         const results = await this.db.select().from(gameTable).where(isNull(gameTable.End)).limit(10)
         return results.map(game => ({
             id: game.id,
@@ -74,6 +75,10 @@ export class DbTicTacToeApi implements TicTacToeApi {
             Player: game.Player as Player,
             GameEnd: game.End as GameEnd,
         }))
+    } catch(err) {
+        console.log("got database error: ", JSON.stringify(err))
+        throw err
+    }
     }
 }
 
