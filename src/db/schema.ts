@@ -1,5 +1,5 @@
 import { pgTable, varchar, jsonb } from 'drizzle-orm/pg-core'
-import { type Board } from '../game/game'
+import { type Board } from '../../src/game/game'
 
 export const gameTable = pgTable('TicTacToe', {
     id: varchar({ length: 255 }).primaryKey(),

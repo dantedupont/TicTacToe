@@ -1,5 +1,5 @@
 import { drizzle } from 'drizzle-orm/postgres-js'
-import { TicTacToeApi } from '../api';
+import { TicTacToeApi } from '../../src/api';
 import { 
     type Game,
     initialGameState as createGame,
@@ -8,7 +8,7 @@ import {
     Board,
     Player,
     GameEnd
- } from "../game/game"
+ } from "../../src/game/game"
 import { gameTable } from './schema';
 import { eq, isNull } from 'drizzle-orm';
 
