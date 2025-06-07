@@ -43,8 +43,8 @@ const makeRoomId = (game: Game) => `game-${game.id}`
 
 const PORT = parseInt(process.env.PORT || "3000")
 
-const server = app.listen(PORT, 
-    () => console.log(`Server is listening at https://localhost:${PORT}`));
+const server = app.listen(PORT, '0.0.0.0', 
+    () => console.log(`Server is listening at https://0.0.0.0${PORT}`));
 
 const io = new Server(server, {
     cors: {
