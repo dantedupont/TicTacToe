@@ -7,11 +7,20 @@ import { GAME_UPDATED, USER_JOINED } from "./constants"
 import { Game } from './src/game/game'
 import { Server } from "socket.io"
 
+const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ["http:localhost:5173"]
+
 
 const app = express();
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: function (origin: string | undefined, callback){
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`
+            return callback(new Error(msg), false)
+        }
+        return callback(null, true)
+    },
     methods: ["GET", "POST"]
 }))
 
@@ -39,7 +48,7 @@ const server = app.listen(PORT,
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: allowedOrigins,
         methods: ["GET", "POST"]
     },
     transports: ['websocket']
