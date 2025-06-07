@@ -14,6 +14,7 @@ Features
 * Live game state updates
 * Player notifications
 * Game history tracking
+  
 Tech Stack
 * Frontend: React, TypeScript, Tailwind CSS
 * Backend: Express, Socket.IO
