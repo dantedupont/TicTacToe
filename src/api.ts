@@ -7,7 +7,7 @@ export interface TicTacToeApi {
     getGames(): Promise<Game[]>
 }
 
-const baseUrl = "http://tictactoe-production-784f.up.railway.app"
+const baseUrl = "https://tictactoe-production-784f.up.railway.app"
 
 export class TicTacToeApiClient implements TicTacToeApi {
     async createGame(mode: Game['GameMode']): Promise<Game> {
