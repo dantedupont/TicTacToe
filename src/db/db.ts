@@ -15,6 +15,8 @@ import { eq, isNull } from 'drizzle-orm';
 
 const DB_URL = process.env.DATABASE_URL as string
 if(!DB_URL) throw Error("No Database URL")
+console.log(DB_URL);
+
 
 
 export class DbTicTacToeApi implements TicTacToeApi {
