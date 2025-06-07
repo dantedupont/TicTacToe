@@ -3,18 +3,18 @@ import { Link } from "react-router"
 
 type ResultsProps = {
     gameEnd: String,
-    rematch: (gameMode: GameMode, gameId: string) => void,
+    rematch: (gameMode: GameMode) => void,
     gameMode: GameMode,
     gameId: string
 }
 
-const Results = ({ gameEnd, rematch, gameMode, gameId } : ResultsProps) => {
+const Results = ({ gameEnd, rematch, gameMode } : ResultsProps) => {
 
     return(
         <div className="game-results">
             <h1>{gameEnd}</h1>
             <button><Link to={'/game/menu'}>Menu</Link></button>
-            <button onClick={() => rematch(gameMode, gameId)}>Rematch</button>
+            <button onClick={() => rematch(gameMode)}>Play Again</button>
         </div>
     )
 }

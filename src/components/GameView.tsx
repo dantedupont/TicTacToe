@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useLoaderData } from "react-router"
+import { useLoaderData, useNavigate } from "react-router"
 import { io } from "socket.io-client"
 
 import Board from './Board'
@@ -24,6 +24,8 @@ const GameView = () => {
   const [game, setGame] = useState<Game>(initialGame)
   const [computerThinking, setComputerThinking] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
+
+  const navigate = useNavigate()
   
   async function cellClick(cellIndex: number){
     console.log(game);
@@ -35,10 +37,10 @@ const GameView = () => {
     setGame(newGame)
   }
 
-  async function rematch(mode: GameMode, gameId: string){
+  async function rematch(mode: GameMode){
     const newGame = await api.createGame(mode)
-    newGame.id = gameId
     setGame(newGame)
+    navigate(`/game/${newGame.id}`)
   }
 
   useEffect(() => {

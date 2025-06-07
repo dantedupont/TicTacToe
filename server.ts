@@ -7,6 +7,8 @@ import { GAME_UPDATED, USER_JOINED } from "./constants"
 import { Game } from './src/game/game'
 import { Server } from "socket.io"
 
+
+
 const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ["http://localhost:5173"]
 
 
