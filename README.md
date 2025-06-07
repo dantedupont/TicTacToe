@@ -1,6 +1,6 @@
 # TicTacToe Multiplayer Game
 
-A real-time multiplayer Tic Tac Toe game built with React, TypeScript, and Socket.IO.
+A real-time multiplayer Tic Tac Toe game built with React, TypeScript, and Socket.IO. Made during my first week at [@fractal-bootcamp](https://github.com/fractal-bootcamp). 
 
 Fully-featured full-stack version on: https://tic-tac-toe-woad-theta.vercel.app/
 
