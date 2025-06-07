@@ -42,7 +42,7 @@ const GameView = () => {
   }
 
   useEffect(() => {
-    const socket = io('http://localhost:3000', {
+    const socket = io('https://tictactoe-production-784f.up.railway.app', {
       transports: ['websocket'],
       autoConnect: true
     });
